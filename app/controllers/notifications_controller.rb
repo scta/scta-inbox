@@ -1,7 +1,20 @@
 class NotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
-    notifications = Notification.all.map {|n| "http://localhost:3000/notifications/#{n.id}"}
+    query_params = {}
+    #todo: change actor to source in db and here
+    if params[:actor] then query_params[:actor] = (params[:actor]) end
+    #target condition is done separately, because it is in the db as a json array
+    if params[:target]
+      notifications = Notification.where(query_params).map do |n|
+        if n.target.include? params[:target]
+          "http://localhost:3000/notifications/#{n.id}"
+        end
+      end
+      notifications.compact!
+    else
+      notifications = Notification.where(query_params).map {|n| "http://localhost:3000/notifications/#{n.id}"}
+    end
     notifications = {
       "@context": "http://www.w3.org/ns/ldp",
       "@id": "http://inbox.scta.info/notifications",
