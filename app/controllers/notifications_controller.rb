@@ -8,11 +8,11 @@ class NotificationsController < ApplicationController
         "contains": notifications
     }
     render :json => notifications
-    #render :json => info
   end
   def create
     body = JSON.parse(request.body.read.html_safe)
-    test_params = {actor: body["actor"], object: body["object"], target: body["target"], updated: body["updated"]}
+    test_params = {actor: body["source"], object: body["object"], target: body["target"], updated: body["updated"], same_as: body["@id"]}
+
     @notification = Notification.create(test_params)
 
     render plain: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
@@ -23,10 +23,11 @@ class NotificationsController < ApplicationController
       "@context": "https://www.w3.org/ns/activitystreams",
       "@id": "http://inbox.scta.info/notifications/#{notification.id}",
       "@type": "Announce",
-      "actor": notification.actor,
+      "source": notification.actor,
       "object": notification.object,
       "target": notification.target,
-      "updated": notification.updated
+      "updated": notification.updated,
+      "same_as": notification.same_as
     }
     render :json => notification_response
   end

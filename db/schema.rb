@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122144221) do
+ActiveRecord::Schema.define(version: 20161123163918) do
 
   create_table "notifications", force: :cascade do |t|
     t.string   "actor"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20161122144221) do
     t.datetime "updated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.         "same_as"
   end
 
 end
