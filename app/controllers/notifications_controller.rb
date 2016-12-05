@@ -28,7 +28,7 @@ class NotificationsController < ApplicationController
 
     @notification = Notification.create(test_params)
 
-    render plain: "Thanks for sending a POST request with cURL! Payload: #{request.body.read}"
+    render plain: "Thanks for sending a POST request"
   end
   def show
     notification = Notification.find(params[:id])
