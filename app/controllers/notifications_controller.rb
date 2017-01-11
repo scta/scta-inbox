@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
     end
     notifications = {
       "@context": "http://www.w3.org/ns/ldp",
-      "@id": "http://inbox.scta.info/notifications",
+      "@id": "http://#{request.host}/notifications?resourceid=#{params[:resourceid]}",
         "contains": notifications
     }
     render :json => notifications
