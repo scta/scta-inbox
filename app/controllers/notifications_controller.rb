@@ -30,7 +30,7 @@ class NotificationsController < ApplicationController
   end
   def create
     body = JSON.parse(request.body.read.html_safe)
-    params = {object: body["body"], target: body["target"], updated: body["updated"]}
+    params = {object: body["body"], target: body["target"], motivation: body["motivation"], updated: body["updated"]}
     @notification = Notification.create(params)
     render plain: "Thanks for sending a POST request", status: 201
   end
@@ -40,6 +40,7 @@ class NotificationsController < ApplicationController
       "@context": "https://www.w3.org/ns/activitystreams",
       "@id": "http://#{request.host}/notifications/#{notification.id}?resourceid=#{params[:resourceid]}",
       "@type": "Announce",
+      "motivation": notification.motivation,
       "body": notification.object,
       "target": notification.target,
       "updated": notification.updated,

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122144221) do
+ActiveRecord::Schema.define(version: 20170111110900) do
 
   create_table "notifications", force: :cascade do |t|
-    t.string   "source"
+    t.string   "motivation"
     t.string   "object"
     t.string   "target"
     t.datetime "updated"
