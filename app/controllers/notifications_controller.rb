@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   end
   def index
     notifications = Notification.where(target: params[:resourceid]).map do |n|
-      "http://#{request.host}:#{request.port}/notifications/#{n.id}?resourceid=#{params[:resourceid]}"
+      "http://#{request.host}/notifications/#{n.id}?resourceid=#{params[:resourceid]}"
     end
     notifications = {
       "@context": "http://www.w3.org/ns/ldp",
@@ -25,7 +25,7 @@ class NotificationsController < ApplicationController
     notification = Notification.find(params[:id])
     notification_response = {
       "@context": "https://www.w3.org/ns/activitystreams",
-      "@id": "http://#{request.host}:#{request.port}/notifications/#{notification.id}?resourceid=#{params[:resourceid]}",
+      "@id": "http://#{request.host}/notifications/#{notification.id}?resourceid=#{params[:resourceid]}",
       "@type": "Announce",
       "body": notification.object,
       "target": notification.target,
