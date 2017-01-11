@@ -1,5 +1,13 @@
 class NotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter: allow_cors
+
+  def allow_cors
+    headers["Access-Control-Allow-Origin"] = "*"
+  end
+
+
+
   def temp
     render plain: "a ldn inbox for scta resources"
   end
