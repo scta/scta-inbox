@@ -19,7 +19,7 @@ class NotificationsController < ApplicationController
     response.set_header("Access-Control-Allow-Headers", %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(","))
 
     notifications = Notification.where(target: params[:resourceid]).map do |n|
-      "http://#{request.host}/notifications/#{n.id}?resourceid=#{params[:resourceid]}"
+      {"@id": "http://#{request.host}/notifications/#{n.id}?resourceid=#{params[:resourceid]}"}
     end
     notifications = {
       "@context": "http://www.w3.org/ns/ldp",
