@@ -36,7 +36,7 @@ class NotificationsController < ApplicationController
     body = JSON.parse(request.body.read.html_safe)
     params = {object: body["body"], target: body["target"], motivation: body["motivation"], updated: body["updated"]}
     # conditional is primitive way to weed out notifications that don't comply with current expectations of inbox
-    if params["body" != nil && params["target"] != nil
+    if params["body"] != nil && params["target"] != nil
       @notification = Notification.create(params)
     end
 
