@@ -36,7 +36,8 @@ class NotificationsController < ApplicationController
     body = JSON.parse(request.body.read.html_safe)
     params = {object: body["body"], target: body["target"], motivation: body["motivation"], updated: body["updated"]}
     # conditional is primitive way to weed out notifications that don't comply with current expectations of inbox
-    if params["object"] != nil && params["target"] != nil
+    
+    if params[:object] != nil || params[:target] != nil
       @notification = Notification.create(params)
       response.set_header("Location", "http://#{request.host}/notifications/#{@notification.id}?resourceid=#{body["target"]}")
       render plain: "Thanks for sending a POST request", status: 201
