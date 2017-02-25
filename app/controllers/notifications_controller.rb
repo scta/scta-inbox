@@ -23,6 +23,7 @@ class NotificationsController < ApplicationController
     end
     notifications = {
       "@context": "http://www.w3.org/ns/ldp",
+      "@type": "ldp:Container",
       "@id": "http://#{request.host}/notifications?resourceid=#{params[:resourceid]}",
         "ldp:contains": notifications
     }
