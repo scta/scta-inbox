@@ -31,6 +31,9 @@ class NotificationsController < ApplicationController
   end
   def create
     response.set_header("Access-Control-Allow-Origin", "*")
+    response.set_header("Access-Control-Allow-Methods", %w{GET POST PUT DELETE}.join(","))
+    response.set_header("Access-Control-Allow-Headers", %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(","))
+    
     response.set_header("Content-Type", "application/ld+json")
     response.set_header("Host", "#{request.host}")
 
