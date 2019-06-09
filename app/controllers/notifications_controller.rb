@@ -7,6 +7,7 @@ class NotificationsController < ApplicationController
     response.set_header("Host", "#{request.host}")
     response.set_header("Allow", "GET, HEAD, OPTIONS, POST")
     response.set_header("Accept-Post", "application/ld+json, text/turtle")
+    response.set_header("Access-Control-Allow-Origin", "*")
     render plain: "Thanks for sending an #{request.request_method} request"
   end
   def index
