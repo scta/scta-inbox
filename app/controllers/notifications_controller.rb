@@ -30,6 +30,7 @@ class NotificationsController < ApplicationController
     render :json => notifications
   end
   def create
+    response.set_header("Access-Control-Allow-Origin", "*")
     response.set_header("Content-Type", "application/ld+json")
     response.set_header("Host", "#{request.host}")
 
